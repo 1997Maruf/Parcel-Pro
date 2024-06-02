@@ -4,6 +4,7 @@ const NaveBar = () => {
     const link = <>
       
       <li><NavLink to='/'> Home</NavLink></li>
+      <li><NavLink to='/login'> Login</NavLink></li>
        
     </>
     return (
