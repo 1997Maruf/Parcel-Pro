@@ -1,13 +1,15 @@
 
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate,  validateCaptcha } from 'react-simple-captcha';
+
 
 const Login = () => {
   const captchaRef = useRef(null);
   const [disabled, setDisable]= useState(true);
   useEffect(()=>{
     loadCaptchaEnginge(6); 
-  },[])
+  },[]);
   const handelLogin = e =>{
     e.preventDefault()
     const form = e.target;
@@ -18,12 +20,11 @@ const Login = () => {
   const handeleValidateCaptcha = () =>{
     const user_captcha_value = captchaRef.current.value;
    if(validateCaptcha(user_captcha_value)){
-
+    setDisable(false)
    
   }
-  else{
-    
-  }
+ 
+}
     return (
       
        <div>
@@ -54,9 +55,10 @@ const Login = () => {
 
             </div>
             <div className="form-control mt-6">
-              <input disabled={disabled} type='submit' value="Login" className="btn btn-primary">Login</input>
+              <input disabled={disabled} type='submit' value="Login" className="btn btn-primary"/>
             </div>
           </form>
+          <p className=' text-center mb-8 '>Have an accound <Link to='/register' className='font-bold text-red-700'>Registration</Link></p>
         </div>
         </div>
        </div>
