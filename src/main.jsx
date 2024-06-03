@@ -10,6 +10,7 @@ import Root from './Layout/Root';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Registration from './Pages/Registration/Registration';
+// import FirebaseProvider from './FirebaseProvider/FirebaseProvider';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,6 +34,8 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    {/* <FirebaseProvider> */}
     <RouterProvider router={router} />
+    {/* </FirebaseProvider> */}
   </React.StrictMode>,
 )
