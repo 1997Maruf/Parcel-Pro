@@ -1,41 +1,61 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-import './index.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Root from './Layout/Root';
-import Home from './Pages/Home/Home';
-import Login from './Pages/Login/Login';
-import Registration from './Pages/Registration/Registration';
-// import FirebaseProvider from './FirebaseProvider/FirebaseProvider';
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Root from "./Layout/Root";
+import Home from "./Pages/Home/Home";
+import Login from "./Pages/Login/Login";
+import Registration from "./Pages/Registration/Registration";
+import AuthProvider from "./Providers/AuthProvider";
+import Dashboard from "./Layout/Dashboard";
+import MyProfile from "./Pages/Dashboard/MyProfile/MyProfile";
+import MyParcels from "./Pages/Dashboard/MyParcels/MyParcels";
+import BookParcel from "./Pages/Dashboard/BookParcel/BookParcel";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
     children: [
       {
-        path:"/",
-        element: <Home></Home>
+        path: "/",
+        element: <Home></Home>,
       },
       {
-
         path: "login",
-        element: <Login></Login>
+        element: <Login></Login>,
       },
       {
-        path:'register',
-        element: <Registration></Registration>
+        path: "register",
+        element: <Registration></Registration>,
+      },
+    ],
+    
+  },
+  {
+    path: 'dashboard',
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "myProfile",
+        element: <MyProfile></MyProfile>
+      },
+      {
+        path: "myParcel",
+        element: <MyParcels></MyParcels>
+      },
+      {
+        path: "bookParcel",
+        element: <BookParcel></BookParcel>
       }
     ]
-  },
+  }
 ]);
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* <FirebaseProvider> */}
-    <RouterProvider router={router} />
-    {/* </FirebaseProvider> */}
-  </React.StrictMode>,
-)
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </React.StrictMode>
+);

@@ -1,24 +1,37 @@
+
+
+
+
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Providers/AuthProvider";
+
+
+
 
 const Registration = () => {
+
+ 
   const {
     register,
     handleSubmit,
    
     formState: { errors },
   } = useForm();
+
+const {createUser} = useContext(AuthContext);
+
+
+
   const onSubmit = (data) => {
     console.log(data);
+    console.log(data.email)
+    createUser( data.email, data.password)
+    .then(result =>{
+      const loggedUser =result.user;
+      console.log(loggedUser);
+    })
   };
-  // const handelRegister = e =>{
-  //     e.preventDefault()
-  //     const form = e.target;
-  //     const name = form.name.value;
-  //     const email = form.email.value;
-  //     const photo = form.photo.value;
-  //     const password = form.password.value;
-  //     console.log(name, email, photo, password)
-  //   }
   return (
     <div>
       <div className="flex justify-center items-center mt-10 mb-20">
@@ -90,7 +103,7 @@ const Registration = () => {
                   required: true,
                   maxLength: 6,
                   minLength: 4,
-                  pattern: /^[A-Za-z]+$/i,
+                  pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                 })}
                 name="password"
                 className="input input-bordered"
