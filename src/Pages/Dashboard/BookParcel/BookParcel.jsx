@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const BookParcel = () => {
@@ -24,7 +25,7 @@ const BookParcel = () => {
 
       console.log(name,email,phone,type,weight,receiver,phoneNumber,deliveryAddress,deliveryDate,Price,longitude,latitude);
       const booking = {name,email,phone,type,weight,receiver,phoneNumber,deliveryAddress,deliveryDate,Price,longitude,latitude}
-      fetch('https://code-crafter-hub-serveer.vercel.app/assignment',{
+      fetch('http://localhost:5000/booking',{
             method: 'POST',
             headers: {
                 'content-type' : 'application/json'
@@ -37,7 +38,7 @@ const BookParcel = () => {
             if(data.insertedId){
                 Swal.fire({
                     title: 'Success!',
-                    text: 'Assignm Added Successfully',
+                    text: 'Booking Added Successfully',
                     icon: 'success',
                     confirmButtonText: 'Cool'
                   })

@@ -12,7 +12,7 @@ import Dashboard from "./Layout/Dashboard";
 import MyProfile from "./Pages/Dashboard/MyProfile/MyProfile";
 import MyParcels from "./Pages/Dashboard/MyParcels/MyParcels";
 import BookParcel from "./Pages/Dashboard/BookParcel/BookParcel";
-
+import Private from "./Layout/Private";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,8 +35,9 @@ const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    element: <Dashboard></Dashboard>,
-    children: [
+    element: <Private><Dashboard></Dashboard></Private> ,
+    children:
+    [
       {
         path: "myProfile",
         element: <MyProfile></MyProfile>

@@ -1,36 +1,35 @@
-
-
-
-
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
-
-
-
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Registration = () => {
-
- 
   const {
     register,
     handleSubmit,
-   
+
     formState: { errors },
   } = useForm();
 
-const {createUser} = useContext(AuthContext);
-
-
+  const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     console.log(data);
-    console.log(data.email)
-    createUser( data.email, data.password)
-    .then(result =>{
-      const loggedUser =result.user;
+    console.log(data.email);
+    createUser(data.email, data.password).then((result) => {
+      const loggedUser = result.user;
       console.log(loggedUser);
-    })
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User Save",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      navigate('/');
+    });
   };
   return (
     <div>
@@ -139,6 +138,7 @@ const {createUser} = useContext(AuthContext);
               />
             </div>
           </form>
+          <p className=' text-center mb-8 '>Already haven account <Link to='/login' className='font-bold text-red-700'>Login</Link></p>
         </div>
       </div>
     </div>
