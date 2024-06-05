@@ -1,22 +1,53 @@
+import { useContext } from "react";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 
 const BookParcel = () => {
+    const {user} = useContext(AuthContext);
+    console.log(user)
     const handleBook = event => {
         event.preventDefault();
         const form = event.target;
-        const title = form.title.value;
-        const marks = form.marks.value;
-        const difficulty = form.difficulty.value;
-        const date = form.date.value;
-        const thumbnailImageUrl = form.thumbnailImageUrl.value;
-        const description = form.description.value;
+        const name = form.name.value;
+        const email = form.email.value;
+        const phone = form.phone.value;
+        const type = form.type.value;
+        const weight = form.weight.value;
+        const receiver = form.receiver.value;
+        const phoneNumber = form.phoneNumber.value;
+        const deliveryAddress = form.deliveryAddress.value;
+        const deliveryDate = form.deliveryAddress.value;
+        const Price = form.Price.value;
+        const longitude = form.longitude.value;
+        const latitude = form.latitude.value;
+        
 
-      console.log(title, marks, difficulty, date, thumbnailImageUrl, description)
+      console.log(name,email,phone,type,weight,receiver,phoneNumber,deliveryAddress,deliveryDate,Price,longitude,latitude);
+      const booking = {name,email,phone,type,weight,receiver,phoneNumber,deliveryAddress,deliveryDate,Price,longitude,latitude}
+      fetch('https://code-crafter-hub-serveer.vercel.app/assignment',{
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body : JSON.stringify(booking)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.insertedId){
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Assignm Added Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                  })
+            }
+        })
     }
     return (
         <div>
           <div className=" p-24">
-        <h2 className="text-3xl font-extrabold">Add a Assignment</h2>
+        <h2 className="text-3xl font-extrabold">Book a Parcel</h2>
         <form onSubmit={handleBook}>
             {/* form supplier row */}
             <div className="md:flex mb-8">
@@ -25,7 +56,7 @@ const BookParcel = () => {
                         <span className="label-text">Name</span>
                     </label>
                     <label className="input-group">
-                        <input type="text" name="name"  placeholder="Name" className="input input-bordered w-full" />
+                        <input type="text" defaultValue={user?.displayName} name="name"  placeholder="Name" className="input input-bordered w-full" />
                     </label>
                 </div>
                 <div className="form-control md:w-1/2 lg:ml-4">
@@ -33,50 +64,105 @@ const BookParcel = () => {
                         <span className="label-text">Email</span>
                     </label>
                     <label className="input-group">
-                        <input type="email" name="email" placeholder="Email" className="input input-bordered w-full" />
+                        <input type="email" defaultValue={user?.email} name="email" placeholder="Email" className="input input-bordered w-full" />
                     </label>
                 </div>
             </div>
             <div className="md:flex mb-8">
-                  <div className="form-control md:w-1/2 lg:ml-4">
+                <div className="form-control md:w-1/2">
                     <label className="label">
-                        <span className="label-text">thumbnail Image URL</span>
+                        <span className="label-text">Phone Number</span>
                     </label>
                     <label className="input-group">
-                        <input type="text" name="thumbnailImageUrl" placeholder="thumbnail Image URL" className="input input-bordered -ml-4 w-full" />
+                        <input type="number"  name="phone"  placeholder="Phone Number" className="input input-bordered w-full" />
                     </label>
                 </div>
-                <div className="form-control w-1/2 border-2xl">
-                  <select className="py-3 mt-8 pl-2" id="difficulty" name="difficulty ">
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                  </select>
-                </div>
-                
-            </div>
-            
-            <div className="form-control md:w-1/2 lg:ml-4">
+                <div className="form-control md:w-1/2 lg:ml-4">
                     <label className="label">
-                        <span className="label-text">Date</span>
+                        <span className="label-text">Parcel Type</span>
                     </label>
                     <label className="input-group">
-                        <input type="date" name="date" placeholder="Date" className="input input-bordered -ml-4 w-full" />
-                    </label>
-                </div>
-            {/* form difficulty level */}
-                
-            <div className="mb-8">
-                <div className="form-control w-full">
-                    <label className="label">
-                        <span className="label-text">description </span>
-                    </label>
-                    <label className="input-group">
-                        <input type="text" name="description" placeholder="description " className="input input-bordered w-full" />
+                        <input type="text" name="type" placeholder="Parcel Type" className="input input-bordered w-full" />
                     </label>
                 </div>
             </div>
-            <input type="submit" value="Add" className="btn btn-block" />
+            <div className="md:flex mb-8">
+                <div className="form-control md:w-1/2">
+                    <label className="label">
+                        <span className="label-text">Parcel Weight</span>
+                    </label>
+                    <label className="input-group">
+                        <input type="number" name="weight"  placeholder="Parcel Weight" className="input input-bordered w-full" />
+                    </label>
+                </div>
+                <div className="form-control md:w-1/2 lg:ml-4">
+                    <label className="label">
+                        <span className="label-text">Receiver’s Name</span>
+                    </label>
+                    <label className="input-group">
+                        <input type="text" name="receiver" placeholder="Email" className="input input-bordered w-full" />
+                    </label>
+                </div>
+            </div>
+            <div className="md:flex mb-8">
+                <div className="form-control md:w-1/2">
+                    <label className="label">
+                        <span className="label-text">Receivers Phone Number</span>
+                    </label>
+                    <label className="input-group">
+                        <input type="number" name="phoneNumber"  placeholder="Parcel Weight" className="input input-bordered w-full" />
+                    </label>
+                </div>
+                <div className="form-control md:w-1/2 lg:ml-4">
+                    <label className="label">
+                        <span className="label-text">Parcel Delivery Address</span>
+                    </label>
+                    <label className="input-group">
+                        <input type="text" name="deliveryAddress" placeholder="Parcel Delivery Address" className="input input-bordered w-full" />
+                    </label>
+                </div>
+            </div>
+            <div className="md:flex mb-8">
+                <div className="form-control md:w-1/2">
+                    <label className="label">
+                        <span className="label-text">Requested Delivery Date</span>
+                    </label>
+                    <label className="input-group">
+                        <input type="text" name="deliveryDate"  placeholder="Requested Delivery Date" className="input input-bordered w-full" />
+                    </label>
+                </div>
+                <div className="form-control md:w-1/2 lg:ml-4">
+                    <label className="label">
+                        <span className="label-text">Delivery Address Latitude </span>
+                    </label>
+                    <label className="input-group">
+                        <input type="text" name="latitude" placeholder="Delivery Address Latitude " className="input input-bordered w-full" />
+                    </label>
+                </div>
+            </div>
+            <div className="md:flex mb-8">
+                <div className="form-control md:w-1/2">
+                    <label className="label">
+                        <span className="label-text">Delivery Address longitude </span>
+                    </label>
+                    <label className="input-group">
+                        <input type="text" name="longitude"  placeholder="Delivery Address longitude " className="input input-bordered w-full" />
+                    </label>
+                </div>
+               
+            </div>
+            <div className="md:flex mb-8">
+                <div className="form-control md:w-1/2">
+                    <label className="label">
+                        <span className="label-text">Price</span>
+                    </label>
+                    <label className="input-group">
+                        <input type="text" name="Price"  placeholder="Delivery Address longitude " className="input input-bordered w-full" />
+                    </label>
+                </div>
+                
+            </div>
+            <input type="submit" value="Book" className="btn btn-block" />
 
         </form>
     </div>
