@@ -3,32 +3,56 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import GoogleSignIn from "../../ShareComponent/GoogleSignIn/GoogleSignIn";
 
 const Registration = () => {
+  const axiosPublic= useAxiosPublic();
   const {
     register,
     handleSubmit,
+    reset,
 
     formState: { errors },
   } = useForm();
 
-  const { createUser } = useContext(AuthContext);
+  const { createUser,updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
     console.log(data);
     console.log(data.email);
-    createUser(data.email, data.password).then((result) => {
+    createUser(data.email, data.password)
+    .then((result) => {
       const loggedUser = result.user;
-      console.log(loggedUser);
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "User Save",
-        showConfirmButton: false,
-        timer: 1500
-      });
-      navigate('/');
+
+      updateUserProfile(data.name, data.photoURL)
+      .then(()=>{
+        data.name,
+         data.photoURL
+        const userInfo = {
+          name: data.name,
+          email: data.email
+        }
+        axiosPublic.post('/users', userInfo)
+        .then(res =>{
+          if(res.data.insertedId){
+            console.log('user add a database')
+            reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "User Save",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        navigate('/');
+          }
+        })
+        
+      })
+      
+    
     });
   };
   return (
@@ -138,6 +162,7 @@ const Registration = () => {
               />
             </div>
           </form>
+          <GoogleSignIn></GoogleSignIn>
           <p className=' text-center mb-8 '>Already haven account <Link to='/login' className='font-bold text-red-700'>Login</Link></p>
         </div>
       </div>

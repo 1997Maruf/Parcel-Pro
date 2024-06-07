@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 import { createContext, useEffect, useState } from "react";
@@ -35,6 +36,12 @@ const signIn = (email,password) => {
   setLoading(true);
   return signInWithPopup(auth, googleProvider)
  }
+ //update Profile
+ const  updateUserProfile = (name , photo)=>{
+  return updateProfile(auth.currentUser, {
+      displayName: name, photoURL: photo
+    })
+}
 //Logout
 const logOut = ()=>{
   setUser(null)
@@ -56,6 +63,7 @@ const logOut = ()=>{
     loading,
     createUser,
     signIn,
+    updateUserProfile,
     googleSignIn,
     logOut
   };

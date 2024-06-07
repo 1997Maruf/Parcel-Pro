@@ -13,6 +13,7 @@ import MyProfile from "./Pages/Dashboard/MyProfile/MyProfile";
 import MyParcels from "./Pages/Dashboard/MyParcels/MyParcels";
 import BookParcel from "./Pages/Dashboard/BookParcel/BookParcel";
 import Private from "./Layout/Private";
+import AllUsers from "./Pages/Dashboard/AllUsers/AllUsers";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "bookParcel",
         element: <BookParcel></BookParcel>
+      },
+      {
+        path: "allUsers",
+        element: <AllUsers></AllUsers>
       }
     ]
   }

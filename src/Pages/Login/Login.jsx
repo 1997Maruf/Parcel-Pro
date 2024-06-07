@@ -6,7 +6,10 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../Providers/AuthProvider";
+
+
 import Swal from "sweetalert2";
+import GoogleSignIn from "../../ShareComponent/GoogleSignIn/GoogleSignIn";
 // import { AuthContext } from '../../FirebaseProvider/FirebaseProvider';
 
 const Login = () => {
@@ -17,7 +20,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.form?.pathname || "/";
-console.log(location);
+  console.log(location);
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -35,11 +38,12 @@ console.log(location);
         icon: "success",
         title: "Your work has been saved",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
       navigate(from);
     });
   };
+  
   const handeleValidateCaptcha = () => {
     const user_captcha_value = captchaRef.current.value;
     if (validateCaptcha(user_captcha_value)) {
@@ -80,7 +84,7 @@ console.log(location);
                 </a>
               </label>
             </div>
-           
+
             <div className="form-control mt-6">
               <input
                 disabled={disabled}
@@ -90,25 +94,26 @@ console.log(location);
               />
             </div>
           </form>
-          <div className="form-control">
-              <label className="label">
-                <LoadCanvasTemplate />
-              </label>
-              <input
-                type="text"
-                placeholder="Captcha"
-                ref={captchaRef}
-                name="Captcha"
-                className="input input-bordered"
-                required
-              />
-              <button
-                onClick={handeleValidateCaptcha}
-                className="btn btn-outline btn-xs mt-4"
-              >
-                Validate
-              </button>
-            </div>
+          <div className="form-control mx-10">
+            <label className="label">
+              <LoadCanvasTemplate />
+            </label>
+            <input
+              type="text"
+              placeholder="Captcha"
+              ref={captchaRef}
+              name="Captcha"
+              className="input input-bordered"
+              required
+            />
+            <button
+              onClick={handeleValidateCaptcha}
+              className="btn btn-outline btn-xs mt-4"
+            >
+              Validate
+            </button>
+          </div>
+         <GoogleSignIn></GoogleSignIn>
           <p className=" text-center mb-8 ">
             Have an account{" "}
             <Link to="/register" className="font-bold text-red-700">
