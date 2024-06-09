@@ -21,18 +21,18 @@ const Registration = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    console.log(data.email);
+    console.log(data.number);
     createUser(data.email, data.password)
     .then((result) => {
       const loggedUser = result.user;
 
       updateUserProfile(data.name, data.photoURL)
       .then(()=>{
-        data.name,
-         data.photoURL
+       
         const userInfo = {
           name: data.name,
-          email: data.email
+          email: data.email,
+          phone: data.number
         }
         axiosPublic.post('/users', userInfo)
         .then(res =>{
@@ -92,6 +92,24 @@ const Registration = () => {
                 required
               />
               {errors.email && (
+                <span className="text-red-800 mt-2">
+                  This field is required
+                </span>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Phone Number</span>
+              </label>
+              <input
+                type="number"
+                placeholder="Phone Number"
+                {...register("number", { required: true })}
+                name="number"
+                className="input input-bordered"
+                required
+              />
+              {errors.number && (
                 <span className="text-red-800 mt-2">
                   This field is required
                 </span>
