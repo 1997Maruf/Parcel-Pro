@@ -1,6 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
-import ParcelCard from "./ParcelCard";
+
+import MyparcelRow from "./MyparcelRow";
+
+
+ 
 const MyParcels = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
@@ -11,31 +15,36 @@ const MyParcels = () => {
       .then((res) => res.json())
       .then((data) => setBookings(data));
   }, [user?.email, url]);
+  
+  
   return (
-    <>
-    <div className="overflow-x-auto">
-  <table className="table">
+<div className="overflow-x-auto">
+  <table className="table table-zebra">
     {/* head */}
     <thead>
       <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
+      <th>#</th>
+        <th>Parcel Type</th>
+        <th>Requested Delivery Date</th>
+        <th>Approximate Delivery Date</th>
+        <th>Booking Date</th>
+        <th>Delivery Men ID</th>
+        <th>Booking Status</th>
+        <th>Update</th>
+        <th>Cancel</th>
+        <th>Review</th>
+        <th>Pay</th>
       </tr>
     </thead>
-    <tbody>
-      {/* row 1 */}
-      
-      
-    </tbody>
+    {
+      bookings.map(booking => <MyparcelRow key={booking._id} booking={booking}></MyparcelRow>)
+    }
   </table>
 </div>
-        {
-            bookings.map(booking => <ParcelCard key={booking._id} booking={booking}></ParcelCard>)
-        }
-      </>
+    
   );
 };
 
 export default MyParcels;
+
+

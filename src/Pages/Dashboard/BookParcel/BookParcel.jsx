@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 const BookParcel = () => {
     const {user} = useContext(AuthContext);
     console.log(user)
+    const bookingDate = new Date();
+    
     const handleBook = event => {
         event.preventDefault();
         const form = event.target;
@@ -22,9 +24,9 @@ const BookParcel = () => {
         const longitude = form.longitude.value;
         const latitude = form.latitude.value;
         
-
+ 
       console.log(name,email,phone,type,weight,receiver,phoneNumber,deliveryAddress,deliveryDate,Price,longitude,latitude);
-      const booking = {name,email,phone,type,weight,receiver,phoneNumber,deliveryAddress,deliveryDate,Price,longitude,latitude}
+      const booking = {name,email,phone,type,weight,receiver,phoneNumber,deliveryAddress,deliveryDate,Price,longitude,latitude,bookingDate}
       fetch('http://localhost:5000/booking',{
             method: 'POST',
             headers: {
@@ -129,7 +131,7 @@ const BookParcel = () => {
                         <span className="label-text">Requested Delivery Date</span>
                     </label>
                     <label className="input-group">
-                        <input type="text" name="deliveryDate"  placeholder="Requested Delivery Date" className="input input-bordered w-full" />
+                        <input type="date" name="deliveryDate"  placeholder="Requested Delivery Date" className="input input-bordered w-full" />
                     </label>
                 </div>
                 <div className="form-control md:w-1/2 lg:ml-4">
@@ -158,7 +160,7 @@ const BookParcel = () => {
                         <span className="label-text">Price</span>
                     </label>
                     <label className="input-group">
-                        <input type="text" name="Price"  placeholder="Delivery Address longitude " className="input input-bordered w-full" />
+                        <input type="number" id="Grand-Total" name="Price"   placeholder="Delivery Address longitude " className="input input-bordered w-full" />
                     </label>
                 </div>
                 

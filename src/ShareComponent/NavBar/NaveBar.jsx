@@ -71,7 +71,7 @@ const NaveBar = () => {
                       role="button"
                       className="btn btn-ghost btn-circle"
                     >
-                      <img alt="img" className="rounded-full" src={user?.photoURL} />
+                      <img alt="img" className="rounded-full " src={user?.photoURL} />
                     </div>
                     <ul
                       tabIndex={0}

@@ -25,53 +25,42 @@ const AuthProvider = ({ children }) => {
   const axiosPublic = useAxiosPublic();
   //Create User
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-//Sign In
-const signIn = (email,password) => {
-  setLoading(true);
-  return signInWithEmailAndPassword(auth, email, password);
-}
-//google Sign In
- const googleSignIn = () =>{
-  setLoading(true);
-  return signInWithPopup(auth, googleProvider)
- }
- //update Profile
- const  updateUserProfile = (name , photo)=>{
-  return updateProfile(auth.currentUser, {
-      displayName: name, photoURL: photo
-    })
-}
-//Logout
-const logOut = ()=>{
-  setUser(null)
-  signOut(auth)
-}
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      if(currentUser){
-        const userInfo ={ email: currentUser.email};
-         axiosPublic.post('/jwt', userInfo)
-         .then(res =>{
-          if(res.data.token){
-            localStorage.setItem('access-token', res.data.token);
-          }
-         })
-      }
-      else{ 
-      localStorage.removeItem('access-token');
-      }
-      console.log("current User", currentUser);
-      setLoading(false);
+  //Sign In
+  const signIn = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+  //google Sign In
+  const googleSignIn = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
+  //update Profile
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
     });
-    return () => {
-      return unsubscribe;
-    };
-  }, []);
+  };
+  //Logout
+  const logOut = () => {
+    setUser(null);
+    signOut(auth);
+  };
+
+  useEffect(() =>{
+    const unsubscribe = onAuthStateChanged(auth, currentUser =>{
+           setUser(currentUser);
+           setLoading(false);
+       })
+       return () =>{
+           return unsubscribe();
+       }
+   },[])
   const authInfo = {
     user,
     loading,
@@ -79,10 +68,11 @@ const logOut = ()=>{
     signIn,
     updateUserProfile,
     googleSignIn,
-    logOut
+    logOut,
   };
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={authInfo}>{children}
+    </AuthContext.Provider>
   );
 };
 

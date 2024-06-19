@@ -1,65 +1,71 @@
 import { useContext } from "react";
-import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import GoogleSignIn from "../../ShareComponent/GoogleSignIn/GoogleSignIn";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useMutation } from "@tanstack/react-query";
 
 const Registration = () => {
   const axiosPublic= useAxiosPublic();
-  const {
-    register,
-    handleSubmit,
-    reset,
 
-    formState: { errors },
-  } = useForm();
-
+   
   const { createUser,updateUserProfile } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log(data.number);
-    createUser(data.email, data.password)
-    .then((result) => {
-      const loggedUser = result.user;
-
-      updateUserProfile(data.name, data.photoURL)
-      .then(()=>{
-       
-        const userInfo = {
-          name: data.name,
-          email: data.email,
-          phone: data.number
+  const navigete = useNavigate();
+const role = "user";
+  
+  const handleSubmit = async e =>{
+    e.preventDefault()
+    const form = e.target
+    const name = form.name.value
+    const email = form.email.value
+    const phone = form.phone.value
+    const image = form.image.files[0]
+    const password = form.password.value
+    const formData = new FormData()
+    formData.append('image', image)
+    try{
+      const {data} = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_API_KEY}`,
+     formData
+      )
+      //user Registration
+      const result = await createUser(email, password)
+      console.log(result);
+      //update profile
+      await updateUserProfile(name, data.data.display_url)
+      console.log(data);
+      const userInfo = {
+        name,
+        email,
+        phone:phone,
+        image:data.data.display_url,
+        role: role,
+      }
+      axiosPublic.post('/users', userInfo)
+      .then(res =>{
+        if(res.data.insertedId){
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User Save",
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
-        axiosPublic.post('/users', userInfo)
-        .then(res =>{
-          if(res.data.insertedId){
-            console.log('user add a database')
-            reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User Save",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        navigate('/');
-          }
-        })
-        
       })
       
-    
-    });
-  };
+        navigete('/login')
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
   return (
     <div>
       <div className="flex justify-center items-center mt-10 mb-20">
         <div className="card shrink-0 w-[50%] shadow-2xl bg-base-100">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+          <form onSubmit={handleSubmit} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
@@ -67,16 +73,11 @@ const Registration = () => {
               <input
                 type="text"
                 placeholder="Name"
-                {...register("name", { required: true })}
+            
                 name="name"
                 className="input input-bordered"
                 required
               />
-              {errors.name && (
-                <span className="text-red-800 mt-2">
-                  This field is required
-                </span>
-              )}
             </div>
 
             <div className="form-control">
@@ -86,53 +87,35 @@ const Registration = () => {
               <input
                 type="email"
                 placeholder="email"
-                {...register("email", { required: true })}
+
                 name="email"
                 className="input input-bordered"
                 required
               />
-              {errors.email && (
-                <span className="text-red-800 mt-2">
-                  This field is required
-                </span>
-              )}
+             
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Phone Number</span>
               </label>
               <input
-                type="number"
+                type="number"name="phone"
                 placeholder="Phone Number"
-                {...register("number", { required: true })}
-                name="number"
-                className="input input-bordered"
-                required
               />
-              {errors.number && (
-                <span className="text-red-800 mt-2">
-                  This field is required
-                </span>
-              )}
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Photo URL</span>
               </label>
               <input
-                type="text"
+                type="file"
+                accept="image/*"
                 placeholder="PhotoURL"
-                {...register("photo", { required: true })}
-                name="photo"
-                className="input input-bordered"
+                name="image"
+                className=" input-bordered"
                 required
               />
-              {errors.photo && (
-                <span className="text-red-800 mt-2">
-                  This field is required
-                </span>
-              )}
-            </div>
+         </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
@@ -140,44 +123,18 @@ const Registration = () => {
               <input
                 type="password"
                 placeholder="password"
-                {...register("password", {
-                  required: true,
-                  maxLength: 6,
-                  minLength: 4,
-                  pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
-                })}
                 name="password"
                 className="input input-bordered"
                 required
               />
-              {errors.password?.type == "required" && (
-                <span className="text-red-800 mt-2">
-                  This field is required
-                </span>
-              )}
-              {errors.password?.type == "maxLength" && (
-                <span className="text-red-800 mt-2">
-                  Password must be lassthen 6 characters
-                </span>
-              )}
-              {errors.password?.type == "minLength" && (
-                <span className="text-red-800  mt-2">
-                  Password must be 4 characters
-                </span>
-              )}
-              {errors.password?.type == "pattern" && (
-                <span className="text-red-800   mt-2">
-                  Password must be one uppercase one lowercase one number one
-                  special characters
-                </span>
-              )}
+              
             </div>
             <div className="form-control mt-6">
               <input
                 type="submit"
                 value="Sign Up"
                 className="btn  btn-primary"
-              />
+       />
             </div>
           </form>
           <GoogleSignIn></GoogleSignIn>

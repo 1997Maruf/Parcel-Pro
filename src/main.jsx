@@ -15,6 +15,10 @@ import BookParcel from "./Pages/Dashboard/BookParcel/BookParcel";
 import Private from "./Layout/Private";
 import AllUsers from "./Pages/Dashboard/AllUsers/AllUsers";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AllParcel from "./Pages/Dashboard/AllParcel/AllParcel";
+import AllDeliveryMen from "./Pages/Dashboard/AllDeliveryMen/AllDeliveryMen";
+import MyDeliveryList from "./Pages/Dashboard/MyDeliveryList/MyDeliveryList";
+import MyReviews from "./Pages/Dashboard/MyReviews/MyReviews";
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
@@ -42,12 +46,14 @@ const router = createBrowserRouter([
     children:
     [
       {
-        path: "myProfile",
-        element: <MyProfile></MyProfile>
+        path: "myProfile",//:email
+        element: <MyProfile></MyProfile>,
+        // loader: ({params})=> fetch(`http://localhost:5000/users/${params.email}`)
       },
       {
         path: "myParcel",
-        element: <MyParcels></MyParcels>
+        element: <MyParcels></MyParcels>,
+        
       },
       {
         path: "bookParcel",
@@ -56,6 +62,22 @@ const router = createBrowserRouter([
       {
         path: "allUsers",
         element: <AllUsers></AllUsers>
+      },
+      {
+        path: "allParcel",
+        element: <AllParcel></AllParcel>
+      },
+      {
+        path: "AllDeliveryMen",
+        element: <AllDeliveryMen></AllDeliveryMen>
+      },
+      {
+        path: "MyDeliveryList",
+        element: <MyDeliveryList></MyDeliveryList>
+      },
+      {
+        path: "MyDeliveryList",
+        element: <MyReviews></MyReviews>
       }
     ]
   }

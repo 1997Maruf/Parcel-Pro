@@ -10,10 +10,14 @@ const AllUsers = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
+      console.log(res.data);
       return res.data;
     },
+   
   });
+
   const handleMkeAdmin = (user) => {
+    console.log(users);
     axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
       console.log(res.data);
       if (res.data.modifiedCount > 0) {
@@ -44,56 +48,64 @@ const AllUsers = () => {
     });
   };
   return (
-    <div className="mx-56">
-      <div className="flex justify-between mb-10 mt-7 bg-green-500 py-4 px-4 rounded-t-2xl">
-        <p>Name</p>
-        <p>Phone</p>
-        <p>Delivery</p>
-        <p>Admin</p>
+    
+      <div className="overflow-x-auto">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Delivery</th>
+              <th>Admin</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* row 1 */}
+            {users?.map((user) => (
+              <tr key={user._id}>
+                <th>1</th>
+                <td>{user?.name}</td>
+                <td>{user?.phone}</td>
+
+                <th className="w-[35%] ml-32 ">
+                  {user.role === "delivery" ? (
+                    "Delivery Man"
+                  ) : (
+                    <button
+                      onClick={() => handleMakeDelivery(user)}
+                      className=" btn text-[10px] flex"
+                    >
+                      <TbTruckDelivery />
+                      Make Delivery Men
+                    </button>
+                  )}
+                </th>
+
+                <th className="w-[25%] ml-32">
+                  {user.role === "admin" ? (
+                    "admin"
+                  ) : (
+                    <button
+                      onClick={() => handleMkeAdmin(user)}
+                      className=" btn p-2 text-[10px]"
+                    >
+                      {" "}
+                      <RiAdminFill />
+                      Make Admin
+                    </button>
+                  )}
+                </th>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <div className="">
-        {users.map((user) => (
-          <div className="mt-10" key={user._id}>
-            <div className="flex justify-between ">
-              <div className="w-[35%]">
-                <h3 className="border-2 border-slate-950 p-2">{user?.name}</h3>
-              </div>
-              <div className="w-[25%] ml-16">
-                <p className="border-2 border-slate-950 p-2">{user?.phone}</p>
-              </div>
-              <div className="w-[35%] ml-32 ">
-                {user.role === "delivery" ? (
-                  "Delivery Man"
-                ) : (
-                  <button
-                    onClick={() => handleMakeDelivery(user)}
-                    className=" btn text-[10px] flex"
-                  >
-                    <TbTruckDelivery />
-                   Make Delivery Men
-                  </button>
-                )}
-              </div>
-              <div className="w-[25%] ml-32">
-                {user.role === "admin" ? (
-                  "admin"
-                ) : (
-                  <button
-                    onClick={() => handleMkeAdmin(user)}
-                    className=" btn p-2 text-[10px]"
-                  >
-                    {" "}
-                    <RiAdminFill />
-                   Make Admin
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+   
   );
 };
 
 export default AllUsers;
+
+
