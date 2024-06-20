@@ -52,7 +52,7 @@ const MyparcelRow = ({booking}) => {
               <td >  <Link to= {`/dashboard/up/${_id}`} className="btn btn-outline btn-secondary">Update</Link></td>
               <td><button onClick={() => haldelDelete(_id)} className="btn btn-outline btn-warning">Cancel</button></td>
               <td><button className="btn btn-outline btn-success"> Review</button></td>
-              <td><button className="btn btn-outline btn-info">Pay</button></td>
+              <td><Link to={`/dashboard/pay/${_id}`} className="btn btn-outline btn-info">Pay</Link></td>
             </tr>
            
       </tbody>

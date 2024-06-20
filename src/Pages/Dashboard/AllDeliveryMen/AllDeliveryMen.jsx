@@ -28,8 +28,8 @@ const AllDeliveryMen = () => {
     <tbody>
       {/* row 1 */}
       {
-        users?.map(user => <tr key={user._id} className="bg-base-200">
-            <th>1</th>
+        users?.map((user,index) => <tr key={user._id} className="bg-base-200">
+            <th>{index + 1}</th>
             <td>{user.name}</td>
             <td>{user.phone}</td>
             <td>Blue</td>

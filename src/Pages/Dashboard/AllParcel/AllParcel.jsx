@@ -16,7 +16,7 @@ const AllParcel = () => {
     {/* head */}
     <thead>
       <tr>
-        <th></th>
+        <th>#</th>
         <th>Name</th>
         <th>Phone</th>
         <th>Booking Date</th>
@@ -29,8 +29,8 @@ const AllParcel = () => {
     <tbody>
       {/* row  */}
       {
-        bookings.map(booking => <tr key={booking._id}>
-            <th>1</th>
+        bookings.map((booking,index) => <tr key={booking._id}>
+            <th>{index + 1}</th>
             <td>{booking.name}</td>
             <td>{booking.phone}</td>
             <td>{booking.bookingDate}</td>

@@ -35,12 +35,6 @@ const Dashboard = () => {
                  All Delivery Men
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/dashboard/up">
-                <GiStorkDelivery />
-                 Update
-                </NavLink>
-              </li>
             </>
           ) 
           } 
