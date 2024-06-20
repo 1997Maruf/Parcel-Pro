@@ -19,6 +19,8 @@ import AllParcel from "./Pages/Dashboard/AllParcel/AllParcel";
 import AllDeliveryMen from "./Pages/Dashboard/AllDeliveryMen/AllDeliveryMen";
 import MyDeliveryList from "./Pages/Dashboard/MyDeliveryList/MyDeliveryList";
 import MyReviews from "./Pages/Dashboard/MyReviews/MyReviews";
+import update from "./Pages/Dashboard/EdtBooking/EdtBooking";
+import EdtBooking from "./Pages/Dashboard/EdtBooking/EdtBooking";
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
@@ -48,7 +50,7 @@ const router = createBrowserRouter([
       {
         path: "myProfile",//:email
         element: <MyProfile></MyProfile>,
-        // loader: ({params})=> fetch(`http://localhost:5000/users/${params.email}`)
+        
       },
       {
         path: "myParcel",
@@ -78,7 +80,13 @@ const router = createBrowserRouter([
       {
         path: "MyDeliveryList",
         element: <MyReviews></MyReviews>
-      }
+      },
+      {
+        path:'up/:id',
+        element:<EdtBooking></EdtBooking>,
+        loader: ({params})=> fetch(`http://localhost:5000/booking/${params.id}`)
+      }      
+    
     ]
   }
 ]);

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const MyparcelRow = ({booking}) => {
@@ -48,12 +49,10 @@ const MyparcelRow = ({booking}) => {
               <td>{bookingDate}</td>
               <td>Delivery Men ID</td>
               <td>pending</td>
-              <td > <button className="btn btn-outline btn-secondary">Update</button></td>
+              <td >  <Link to= {`/dashboard/up/${_id}`} className="btn btn-outline btn-secondary">Update</Link></td>
               <td><button onClick={() => haldelDelete(_id)} className="btn btn-outline btn-warning">Cancel</button></td>
-              <td><button className="btn btn-outline btn-success"> Review</button>
-             </td>
-              <td><button className="btn btn-outline btn-info">Pay</button>
-              </td>
+              <td><button className="btn btn-outline btn-success"> Review</button></td>
+              <td><button className="btn btn-outline btn-info">Pay</button></td>
             </tr>
            
       </tbody>
