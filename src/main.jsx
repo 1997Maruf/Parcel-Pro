@@ -22,6 +22,7 @@ import MyReviews from "./Pages/Dashboard/MyReviews/MyReviews";
 import update from "./Pages/Dashboard/EdtBooking/EdtBooking";
 import EdtBooking from "./Pages/Dashboard/EdtBooking/EdtBooking";
 import Pay from "./Pages/Dashboard/Pay/Pay";
+import PaySuccess from "./Pages/PaySuccess/PaySuccess";
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
@@ -91,8 +92,11 @@ const router = createBrowserRouter([
         path:'pay/:id',
         element:<Pay></Pay>,
         loader: ({params})=> fetch(`http://localhost:5000/booking/${params.id}`)
-      }      
-    
+      },      
+       {
+        path:"pay-success",
+        element:<PaySuccess></PaySuccess>
+       }
     ]
   }
 ]);

@@ -48,7 +48,7 @@ const role = "user";
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "User Save",
+            title: "Registration Success",
             showConfirmButton: false,
             timer: 1500
           });
