@@ -21,9 +21,9 @@ const MyProfile = () => {
     // });
   const [userInfo, setUserInfo] = useState([]);
   console.log(userInfo);
-  // const url = `http://localhost:5000/users?email=${user?.email}`;
+  // const url = `https://parcel-pro-server-livid.vercel.app/users?email=${user?.email}`;
   useEffect(() => {
-    fetch(`http://localhost:5000/users?email=${email}`)
+    fetch(`https://parcel-pro-server-livid.vercel.app/users?email=${email}`)
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
   }, [user]);

@@ -20,7 +20,7 @@ const MyparcelRow = ({booking}) => {
               "Your file has been deleted.",
                "success"
             )
-           fetch(`http://localhost:5000/booking/${_id}`,{
+           fetch(`https://parcel-pro-server-livid.vercel.app/booking/${_id}`,{
             method: 'DELETE'
            } )
            .then(res => res.json())

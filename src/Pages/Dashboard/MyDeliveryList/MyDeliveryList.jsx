@@ -6,7 +6,7 @@ const MyDeliveryList = () => {
   const {user} = useContext(AuthContext);
     const [usern, setUsern] = useState([]);
   console.log(usern);
-  const url = `http://localhost:5000/users?email=${user?.email}`;
+  const url = `https://parcel-pro-server-livid.vercel.app/users?email=${user?.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
