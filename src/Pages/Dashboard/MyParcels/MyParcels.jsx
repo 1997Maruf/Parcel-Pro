@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 
 import MyparcelRow from "./MyparcelRow";
-import { Link } from "react-router-dom";
+
 
 
  
@@ -38,7 +38,7 @@ const MyParcels = () => {
       </tr>
     </thead>
     {
-      bookings.map(booking => <MyparcelRow key={booking._id} booking={booking}></MyparcelRow>)
+      bookings.map((booking, index) => <MyparcelRow key={booking._id} index={index} booking={booking}></MyparcelRow>)
     }
   </table>
  

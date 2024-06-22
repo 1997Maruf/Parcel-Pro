@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const MyparcelRow = ({booking}) => {
-    const {type,deliveryDate,bookingDate,_id}= booking;
+    const {type,deliveryDate,bookingDate,_id, status}= booking;
     const haldelDelete = _id =>{
         console.log(_id);
         Swal.fire({
@@ -48,7 +48,7 @@ const MyparcelRow = ({booking}) => {
               <td>{deliveryDate}</td>
               <td>{bookingDate}</td>
               <td>Delivery Men ID</td>
-              <td>pending</td>
+              <td>{booking.status}</td>
               <td >  <Link to= {`/dashboard/up/${_id}`} className="btn btn-outline btn-secondary">Update</Link></td>
               <td><button onClick={() => haldelDelete(_id)} className="btn btn-outline btn-warning">Cancel</button></td>
               <td><button className="btn btn-outline btn-success"> Review</button></td>

@@ -57,7 +57,7 @@ const CheckoutForm = () => {
        })
         if(paymentIntent){
             console.log('payment intent', paymentIntent),
-            naviget("/pay-success")
+            naviget("/dashboard/pay-success")
         }
         else{
             console.log('confirm error', confirmError) 

@@ -7,7 +7,7 @@ const BookParcel = () => {
     const {user} = useContext(AuthContext);
     console.log(user)
     const bookingDate = new Date();
-    
+    const status = "pending"
     const handleBook = event => {
         event.preventDefault();
         const form = event.target;
@@ -26,7 +26,7 @@ const BookParcel = () => {
         
  
       console.log(name,email,phone,type,weight,receiver,phoneNumber,deliveryAddress,deliveryDate,Price,longitude,latitude);
-      const booking = {name,email,phone,type,weight,receiver,phoneNumber,deliveryAddress,deliveryDate,Price,longitude,latitude,bookingDate}
+      const booking = {status,name,email,phone,type,weight,receiver,phoneNumber,deliveryAddress,deliveryDate,Price,longitude,latitude,bookingDate}
       fetch('http://localhost:5000/booking',{
             method: 'POST',
             headers: {

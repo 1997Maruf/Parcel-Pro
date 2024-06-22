@@ -11,9 +11,6 @@ const EdtBooking = () => {
 
     console.log(type,deliveryDate,bookingDate,_id,phone,weight,receiver,phoneNumber,deliveryAddress,Price,longitude,latitude);
     const handelUpdate = event => {
-
-        event.preventDefault();
-
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;

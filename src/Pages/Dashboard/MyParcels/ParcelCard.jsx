@@ -1,9 +1,9 @@
-const ParcelCard = ({ booking }) => {
+const ParcelCard = ({ booking, index }) => {
   const { type, deliveryDate } = booking;
   return (
     <div>
       <tr>
-        <th>1</th>
+        <th>{index + 1}</th>
         <td>{type}</td>
         <td>{deliveryDate}</td>
         <td>Blue</td>

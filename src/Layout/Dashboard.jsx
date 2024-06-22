@@ -13,7 +13,7 @@ const Dashboard = () => {
  const [role] = UseRole();
   return (
     <div className="flex">
-      <div className="w-64  min-h-screen ml-28 bg-green-500">
+      <div className="  min-h-screen  bg-green-500">
         <ul className="menu">
           {role === "admin" && (
             <>
