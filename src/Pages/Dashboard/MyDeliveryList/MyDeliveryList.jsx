@@ -12,14 +12,7 @@ const MyDeliveryList = () => {
       .then((res) => res.json())
       .then((data) => setUsern(data));
   }, []);
-//     const [bookings, setBookings] = useState([]);
-//   console.log(bookings);
-//   const url = `http://localhost:5000/booking/${_id}`;
-//   useEffect(() => {
-//     fetch(url)
-//       .then((res) => res.json())
-//       .then((data) => setBookings(data));
-//   }, []);
+//     
   
     return (
         <div className="overflow-x-auto">
