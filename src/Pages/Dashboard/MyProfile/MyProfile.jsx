@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 // import useAxiosSecure from "../../../hooks/useAxiosSecure";
 // import { useQuery } from "@tanstack/react-query";
 
@@ -8,7 +10,7 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 const MyProfile = () => {
     const { user} = useContext(AuthContext);
     const {displayName,email,photoURL} = user;
-    console.log(user)
+    
     // const axiosSecure = useAxiosSecure();
     // const { data: users = []} = useQuery({
     //   queryKey: ["users", user?.email],
@@ -21,12 +23,12 @@ const MyProfile = () => {
     // });
   const [userInfo, setUserInfo] = useState([]);
   console.log(userInfo);
-  // const url = `https://parcel-pro-server-livid.vercel.app/users?email=${user?.email}`;
+  // const url = http://localhost:5000/users?email=${user?.email}`;
   useEffect(() => {
-    fetch(`https://parcel-pro-server-livid.vercel.app/users?email=${email}`)
+    fetch(`http://localhost:5000/users?email=${email}`)
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
-  }, [user]);
+  }, [user,email]);
   return (
     <div className="card card-compact w-96 bg-base-100 shadow-xl m-auto mt-16">
     <figure><img className="rounded-full w-48 h-48 border-4 border-slate-700 p-5" src={ photoURL} alt="Shoes" /></figure>

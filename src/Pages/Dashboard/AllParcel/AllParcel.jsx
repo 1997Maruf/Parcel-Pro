@@ -10,23 +10,13 @@ import {
 // import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { IdealBankElement } from "@stripe/react-stripe-js";
 
 const AllParcel = () => {
-  let [isOpen, setIsOpen] = useState(false);
- const [_id, set_Id] = useState();
-  function open(id) {
-    setIsOpen(true);
-    set_Id(id._id);
-  }
-
-  function close() {
-    setIsOpen(false);
-  }
+ 
 
   const [bookings, setBookings] = useState([]);
-  console.log(bookings.booking);
-  const url = "https://parcel-pro-server-livid.vercel.app/booking";
+  console.log(bookings);
+  const url = "http://localhost:5000/booking";
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -37,7 +27,7 @@ const AllParcel = () => {
   console.log('deliveryMan',deliveryMans);
 
   useEffect(() => {
-    fetch("https://parcel-pro-server-livid.vercel.app/users")
+    fetch("http://localhost:5000/users")
       .then((res) => res.json())
       .then((data) => {
         const deliveryMan = data.filter((man) => man.role === "delivery");
@@ -45,15 +35,26 @@ const AllParcel = () => {
       });
   }, []);
 
-
+  let [isOpen, setIsOpen] = useState(false);
+  const [_id, set_Id] = useState();
+  console.log(_id)
+   function open(booking) {
+    console.log(booking)
+     setIsOpen(true);
+     set_Id(booking._id);
+   }
+ 
+   function close() {
+     setIsOpen(false);
+   }
   const handleSubmit= (event)  => {
     event.preventDefault();
     const form = event.target;
-    const name = form.value.value;
-    const aoximatedate = form.aoximatedate.value;
-    console.log(name,aoximatedate)
-    const updateBooking = { name, aoximatedate}
-    fetch(`https://parcel-pro-server-livid.vercel.app/booking/${_id}`, {
+    const deliveryMenId = form.deliveryMenId.value;
+    const approximateDate = form.approximateDate.value;
+    console.log(deliveryMenId, approximateDate)
+    const updateBooking = { deliveryMenId, approximateDate}
+    fetch(`http://localhost:5000/booking/${_id}`, {
     method: 'PUT',
     headers: {
         'content-type': 'application/json'
@@ -100,7 +101,7 @@ const AllParcel = () => {
               <td>{booking.bookingDate}</td>
               <td>{booking.deliveryDate}</td>
               <td>{booking.Price}</td>
-              <td>pending</td>
+              <td>{booking.status}</td>
               <td>
                 <Button
                   onClick={()=>open(booking)}
@@ -133,16 +134,16 @@ const AllParcel = () => {
                 <DialogPanel className="w-full max-w-md rounded-xl bg-white/5 p-6 backdrop-blur-2xl">
                   {/* model component */}
                   <form onSubmit={handleSubmit}>
-                  <select >
+                  <select name="deliveryMenId">
               
               {deliveryMans?.map(option=> <option name='name' key={option?._id} value={option?._id}>
-                  {option?.name}
+                  {option?._id}
                 </option>)
               }
             </select>
                      
                     
-                    <input className="ml-5" type="date" name="aoximatedate" />
+                    <input className="ml-5" type="date" name="approximateDate" />
 
                     <input className="bg-orange-400 ml-7" type="submit" value='submit' />
                   </form>
@@ -168,3 +169,11 @@ const AllParcel = () => {
 };
 
 export default AllParcel;
+
+
+
+
+
+
+
+{/* <input type="radio" name="Developer" value="No"> */}

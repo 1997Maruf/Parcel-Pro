@@ -32,7 +32,7 @@ const EdtBooking = () => {
         console.log(updateBooking);
      
 
-        fetch(`https://parcel-pro-server-livid.vercel.app/booking/${_id}`, {
+        fetch(`http://localhost:5000/booking/${_id}`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'

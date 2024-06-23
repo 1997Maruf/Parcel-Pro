@@ -5,13 +5,13 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 const MyDeliveryList = () => {
   const {user} = useContext(AuthContext);
     const [usern, setUsern] = useState([]);
-  console.log(usern);
-  const url = `https://parcel-pro-server-livid.vercel.app/users?email=${user?.email}`;
+  console.log(usern._id);
+  const url = `http://localhost:5000/users?email=${user?.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => setUsern(data));
-  }, []);
+  }, [user?.email]);
 //     
   
     return (

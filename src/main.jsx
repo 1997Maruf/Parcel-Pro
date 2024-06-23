@@ -23,6 +23,8 @@ import update from "./Pages/Dashboard/EdtBooking/EdtBooking";
 import EdtBooking from "./Pages/Dashboard/EdtBooking/EdtBooking";
 import Pay from "./Pages/Dashboard/Pay/Pay";
 import PaySuccess from "./Pages/PaySuccess/PaySuccess";
+
+
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
@@ -69,7 +71,8 @@ const router = createBrowserRouter([
       },
       {
         path: "allParcel",
-        element: <AllParcel></AllParcel>
+        element: <AllParcel></AllParcel>,
+        
       },
       {
         path: "AllDeliveryMen",
@@ -86,13 +89,14 @@ const router = createBrowserRouter([
       {
         path:'up/:id',
         element:<EdtBooking></EdtBooking>,
-        loader: ({params})=> fetch(`https://parcel-pro-server-livid.vercel.app/booking/${params.id}`)
+        loader: ({params})=> fetch(`http://localhost:5000/booking/${params.id}`)
       },    
       {
         path:'pay/:id',
         element:<Pay></Pay>,
-        loader: ({params})=> fetch(`https://parcel-pro-server-livid.vercel.app/booking/${params.id}`)
+        loader: ({params})=> fetch(`http://localhost:5000/booking/${params.id}`)
       },      
+          
        {
         path:"pay-success",
         element:<PaySuccess></PaySuccess>

@@ -27,7 +27,7 @@ const BookParcel = () => {
  
       console.log(name,email,phone,type,weight,receiver,phoneNumber,deliveryAddress,deliveryDate,Price,longitude,latitude);
       const booking = {status,name,email,phone,type,weight,receiver,phoneNumber,deliveryAddress,deliveryDate,Price,longitude,latitude,bookingDate}
-      fetch('https://parcel-pro-server-livid.vercel.app/booking',{
+      fetch('http://localhost:5000/booking',{
             method: 'POST',
             headers: {
                 'content-type' : 'application/json'
