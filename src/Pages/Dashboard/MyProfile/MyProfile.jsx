@@ -9,7 +9,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const MyProfile = () => {
     const { user} = useContext(AuthContext);
-    const {displayName,email,photoURL} = user;
+    
     
     // const axiosSecure = useAxiosSecure();
     // const { data: users = []} = useQuery({
@@ -31,11 +31,11 @@ const MyProfile = () => {
   }, [url]);
   return (
     <div className="card card-compact w-96 bg-base-100 shadow-xl m-auto mt-16">
-    <figure><img className="rounded-full w-48 h-48 border-4 border-slate-700 p-5" src={ photoURL} alt="Shoes" /></figure>
+    <figure><img className="rounded-full w-48 h-48 border-4 border-slate-700 p-5" src={ userInfo?.image} alt="Shoes" /></figure>
     <div className="card-body text-center">
      
-      <h2 className=" text-3xl font-bold text-center">{displayName}</h2>
-      <p>{ email}</p>
+      <h2 className=" text-3xl font-bold text-center">{userInfo?.name}</h2>
+      <p>{userInfo?.email}</p>
       
       <div className="">
         <button className="btn btn-primary">Update profile</button>

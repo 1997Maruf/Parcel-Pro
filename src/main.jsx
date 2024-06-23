@@ -79,11 +79,11 @@ const router = createBrowserRouter([
         element: <AllDeliveryMen></AllDeliveryMen>
       },
       {
-        path: "MyDeliveryList",
+        path: "mydeliverylist",
         element: <MyDeliveryList></MyDeliveryList>
       },
       {
-        path: "MyDeliveryList",
+        path: "reviews",
         element: <MyReviews></MyReviews>
       },
       {

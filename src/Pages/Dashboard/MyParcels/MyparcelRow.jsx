@@ -60,13 +60,14 @@ const MyparcelRow = ({booking}) => {
    }
    const {user} = useContext(AuthContext);
    const {displayName,photoURL} = user;
+   const feedBackDdate = new Date()
    const handleSubmit= (event)  => {
     event.preventDefault();
     const form = event.target;
     const usersName = form.usersName.value;
     const feedback = form.feedback.value;
     const rating = form.rating.value;
-   const feetdback = {displayName,rating,photoURL,feedback,usersName,deliveryMenId};
+   const feetdback = {displayName,rating,photoURL,feedback,usersName,deliveryMenId,feedBackDdate};
    console.log("may feedback",feetdback)
    fetch('http://localhost:5000/feetdbacks',{
     method: 'POST',

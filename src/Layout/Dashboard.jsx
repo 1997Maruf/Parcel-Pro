@@ -41,13 +41,13 @@ const Dashboard = () => {
           {role === "delivery"  && (
             <>
               <li>
-                <NavLink to="/dashboard/MyDeliveryList">
+                <NavLink to="/dashboard/mydeliverylist">
                  
                 <GiStorkDelivery /> My Delivery List
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/MyReviews">
+                <NavLink to="/dashboard/reviews">
                  
                 <MdReviews />My Reviews 
                 </NavLink>
