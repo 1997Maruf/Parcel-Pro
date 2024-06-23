@@ -11,16 +11,12 @@ import {
 } from "@headlessui/react";
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import { deleteField } from "firebase/firestore/lite";
 const MyparcelRow = ({booking}) => {
-  const {user} = useContext(AuthContext);
-  let [isOpen, setIsOpen] = useState(false);
+  console.log("booking",booking);
   
-   function open() {
-    console.log(booking)
-     setIsOpen(true);
-    
-   }
-    const {type,deliveryDate,bookingDate,_id,status}= booking;
+    const {type,deliveryDate,bookingDate,_id,status,deliveryMenId,approximateDate}= booking;
+    console.log("deliveryman id",deliveryMenId);
     const haldelDelete = _id =>{
         console.log(_id);
         Swal.fire({
@@ -55,6 +51,43 @@ const MyparcelRow = ({booking}) => {
           }
         });
       }
+    let [isOpen, setIsOpen] = useState(false);
+   function open() {
+     setIsOpen(true); 
+   }
+   function close() {
+     setIsOpen(false);
+   }
+   const {user} = useContext(AuthContext);
+   const {displayName,photoURL} = user;
+   const handleSubmit= (event)  => {
+    event.preventDefault();
+    const form = event.target;
+    const usersName = form.usersName.value;
+    const feedback = form.feedback.value;
+    const rating = form.rating.value;
+   const feetdback = {displayName,rating,photoURL,feedback,usersName,deliveryMenId};
+   console.log("may feedback",feetdback)
+   fetch('http://localhost:5000/feetdbacks',{
+    method: 'POST',
+    headers: {
+        'content-type' : 'application/json'
+    },
+    body : JSON.stringify(feetdback)
+})
+.then(res => res.json())
+.then(data => {
+    console.log(data);
+    if(data.insertedId){
+        Swal.fire({
+            title: 'Success!',
+            text: 'Booking Added Successfully',
+            icon: 'success',
+            confirmButtonText: 'Cool'
+          })
+    }
+})
+  }
     return (
         
         <tbody>
@@ -63,9 +96,9 @@ const MyparcelRow = ({booking}) => {
               <th>1</th>
               <td>{type}</td>
               <td>{deliveryDate}</td>
-              <td>{deliveryDate}</td>
+              <td>{approximateDate}</td>
               <td>{bookingDate}</td>
-              <td>Delivery Men ID</td>
+              <td>{deliveryMenId}</td>
               <td>{status}</td>
               <td >  <Link to= {`/dashboard/up/${_id}`} className="btn btn-outline btn-secondary">Update</Link></td>
               <td><button onClick={() => haldelDelete(_id)} className="btn btn-outline btn-warning">Cancel</button></td>
@@ -95,11 +128,13 @@ const MyparcelRow = ({booking}) => {
               >
                 <DialogPanel className="w-full max-w-md rounded-xl bg-white/5 p-6 backdrop-blur-2xl">
                   {/* model component */}
-                  <form >
-                    <input className="ml-5" type="text" defaultValue={user.displayName} name="UsersName" placeholder="Users Name" />
+                  <form onSubmit={handleSubmit}>
+                    <input className="ml-5" type="text" defaultValue={user.displayName} name="usersName" placeholder="Users Name" />
+                    <input className="ml-5 mt-8" type="text"  name="feedback" placeholder="Feedback Tex" />
+                    <input className="ml-5 mt-8" type="number"  name="rating" placeholder="rating" />
                     
                     <input className="bg-orange-400 ml-7" type="submit" value='submit' />
-                    <input className="ml-5" type="file"  name="UsersPhotoUrl" defaultValue={'maruf'} placeholder="Users image" />
+                   
                   </form>
                   {/* {deliveryMan?.map((delivery) => (
                     <Model key={delivery?._id} delivery={delivery}></Model>

@@ -23,12 +23,12 @@ const MyProfile = () => {
     // });
   const [userInfo, setUserInfo] = useState([]);
   console.log(userInfo);
-  // const url = http://localhost:5000/users?email=${user?.email}`;
+  const url = `http://localhost:5000/users/${user?.email}`;
   useEffect(() => {
-    fetch(`http://localhost:5000/users?email=${email}`)
+    fetch(url)
       .then((res) => res.json())
       .then((data) => setUserInfo(data));
-  }, [user,email]);
+  }, [url]);
   return (
     <div className="card card-compact w-96 bg-base-100 shadow-xl m-auto mt-16">
     <figure><img className="rounded-full w-48 h-48 border-4 border-slate-700 p-5" src={ photoURL} alt="Shoes" /></figure>

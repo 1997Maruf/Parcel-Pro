@@ -8,8 +8,9 @@ import MyparcelRow from "./MyparcelRow";
  
 const MyParcels = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
   const [bookings, setBookings] = useState([]);
-  console.log(bookings);
+  // console.log(bookings);
   const url = `http://localhost:5000/booking?email=${user?.email}`;
   useEffect(() => {
     fetch(url)

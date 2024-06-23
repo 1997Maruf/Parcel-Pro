@@ -3,17 +3,14 @@ import {
   Button,
   Dialog,
   DialogPanel,
-  DialogTitle,
+
   Transition,
   TransitionChild,
 } from "@headlessui/react";
 // import Swal from "sweetalert2";
-import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
 const AllParcel = () => {
- 
-
   const [bookings, setBookings] = useState([]);
   console.log(bookings);
   const url = "http://localhost:5000/booking";
@@ -135,21 +132,15 @@ const AllParcel = () => {
                   {/* model component */}
                   <form onSubmit={handleSubmit}>
                   <select name="deliveryMenId">
-              
-              {deliveryMans?.map(option=> <option name='name' key={option?._id} value={option?._id}>
-                  {option?._id}
-                </option>)
+              {
+              deliveryMans?.map(dali=> <option key={dali._id} value={dali._id}>{dali.name}</option>)
+                
               }
-            </select>
-                     
-                    
+               </select>
                     <input className="ml-5" type="date" name="approximateDate" />
 
                     <input className="bg-orange-400 ml-7" type="submit" value='submit' />
                   </form>
-                  {/* {deliveryMan?.map((delivery) => (
-                    <Model key={delivery?._id} delivery={delivery}></Model>
-                  ))} */}
                   <div className="mt-4">
                     <Button
                       className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white"
