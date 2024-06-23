@@ -19,7 +19,7 @@ const MyDeliveryList = () => {
     const [deliveryMan, setDeliveryMan] = useState({});
     const {_id} = deliveryMan || {};
   console.log("mydeliverymanID",deliveryMan?._id)
-  const url = `http://localhost:5000/users/${email}`;
+  const url = `https://parcel-pro-server-livid.vercel.app/users/${email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -32,7 +32,7 @@ const MyDeliveryList = () => {
   
   useEffect(() => {
     if(_id){
-      fetch(`http://localhost:5000/bookingById/${_id}`)
+      fetch(`https://parcel-pro-server-livid.vercel.app/bookingById/${_id}`)
       .then((res) => res.json())
       .then((data) =>setParcels(data));
     }
@@ -44,7 +44,7 @@ const MyDeliveryList = () => {
 
     console.log("Hello")
     const updateStatus = {st}
-    fetch(`http://localhost:5000/booking/${_id}`, {
+    fetch(`https://parcel-pro-server-livid.vercel.app/booking/${_id}`, {
     method: 'PUT',
     headers: {
         'content-type': 'application/json'
@@ -69,7 +69,7 @@ const MyDeliveryList = () => {
 
     console.log("Hello")
     const updateSta = {sta}
-    fetch(`http://localhost:5000/booking/${_id}`, {
+    fetch(`https://parcel-pro-server-livid.vercel.app/booking/${_id}`, {
     method: 'PUT',
     headers: {
         'content-type': 'application/json'
@@ -120,19 +120,17 @@ const MyDeliveryList = () => {
           <td>{parcel?.approximateDate}</td>
           <td>{parcel?.phoneNumber}</td>
           <td>{parcel?.deliveryAddress}</td>
-          <td><Button
-        onClick={open}
-        className="rounded-md bg-black/20 py-2 px-4 text-sm font-medium text-white focus:outline-none data-[hover]:bg-black/30 data-[focus]:outline-1 data-[focus]:outline-white"
-      >
-        See Location
-      </Button></td>
+           <td>
+           <button> See Location</button>
+       
+      </td> 
           <td><button onClick={()=>handleSubmi(parcel._id)}>Cancel</button></td>
           <td><button onClick={()=>handleSubmit(parcel._id)}>Deliver</button></td>
         </tr>)
        }
     </tbody>  
    </table> 
-    <Dialog  open={isOpen} as="div" className="relative  z-10 focus:outline-none" onClose={close}>
+    {/* <Dialog  open={isOpen} as="div" className="relative  z-10 focus:outline-none" onClose={close}>
     <div className="fixed inset-0 bg-black z-10 w-screen overflow-y-auto">
       <div className="flex min-h-full items-center justify-center p-4">
         <DialogPanel
@@ -157,7 +155,7 @@ const MyDeliveryList = () => {
         </DialogPanel>
       </div>
     </div>
-  </Dialog>
+  </Dialog> */}
 </div>
     );
 };

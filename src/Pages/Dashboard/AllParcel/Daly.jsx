@@ -14,7 +14,7 @@
 
 //   useEffect(() => {
 //     // Fetch delivery men from the backend
-//     axios.get('http://localhost:5000/users')
+//     axios.get('https://parcel-pro-server-livid.vercel.app/users')
 //       .then(response => setDeliveryMen(response.data))
 //       .catch(error => console.error('Error fetching delivery men:', error));
 //   }, []);
@@ -37,7 +37,7 @@
 // //     const [deliveryMans, setDeliveryMans] = useState([]);
 
 // //   useEffect(() => {
-// //     fetch("http://localhost:5000/users")
+// //     fetch("https://parcel-pro-server-livid.vercel.app/users")
 // //       .then((res) => res.json())
 // //       .then((data) => {
 // //         const deliveryMan = data.filter((man) => man.role === "delivery");
@@ -54,7 +54,7 @@
 //     //     const aoximatedate = form.aoximatedate.value;
 //     //     console.log(name,aoximatedate)
 //     //     const updateBooking = { name, aoximatedate}
-//     //     fetch(http://localhost:5000/booking/${_id}`, {
+//     //     fetch(https://parcel-pro-server-livid.vercel.app/booking/${_id}`, {
 //     //     method: 'PUT',
 //     //     headers: {
 //     //         'content-type': 'application/json'

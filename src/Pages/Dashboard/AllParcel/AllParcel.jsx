@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 const AllParcel = () => {
   const [bookings, setBookings] = useState([]);
   console.log(bookings);
-  const url = "http://localhost:5000/booking";
+  const url = "https://parcel-pro-server-livid.vercel.app/booking";
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -24,7 +24,7 @@ const AllParcel = () => {
   console.log('deliveryMan',deliveryMans);
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://parcel-pro-server-livid.vercel.app/users")
       .then((res) => res.json())
       .then((data) => {
         const deliveryMan = data.filter((man) => man.role === "delivery");
@@ -51,7 +51,7 @@ const AllParcel = () => {
     const approximateDate = form.approximateDate.value;
     console.log(deliveryMenId, approximateDate)
     const updateBooking = { deliveryMenId, approximateDate}
-    fetch(`http://localhost:5000/booking/${_id}`, {
+    fetch(`https://parcel-pro-server-livid.vercel.app/booking/${_id}`, {
     method: 'PUT',
     headers: {
         'content-type': 'application/json'

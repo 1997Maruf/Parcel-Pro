@@ -17,7 +17,7 @@ const MyProfile = () => {
   const [userInfo, setUserInfo] = useState([]);
   const {image} = userInfo;
   console.log(userInfo);
-  const url = `http://localhost:5000/users/${user?.email}`;
+  const url = `https://parcel-pro-server-livid.vercel.app/users/${user?.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
