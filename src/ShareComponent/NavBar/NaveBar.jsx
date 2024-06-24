@@ -25,7 +25,7 @@ const NaveBar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 lg:w-full sm:w-[485px]">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -62,7 +62,7 @@ const NaveBar = () => {
       <div className="navbar-end">
         {user ? (
           <>
-            <div className="mr-40">
+            <div className="lg:mr-40">
               <div>
                 <div className="navbar-start">
                   <div className="dropdown">

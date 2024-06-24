@@ -27,7 +27,7 @@ const MyReviews = () => {
   }, [_id]);
 
   return (
-   <div>
+   <div className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
     {
     feetdback.map(feed =>  <div key={feed._id} className="card card-compact w-96 bg-base-100 shadow-xl m-auto mt-16">
       <figure><img className="rounded-full w-48 h-48 border-4 border-slate-700 p-5" src={ feed?.photoURL} alt="Shoes" /></figure>

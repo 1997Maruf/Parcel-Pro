@@ -89,12 +89,12 @@ const router = createBrowserRouter([
       {
         path:'up/:id',
         element:<EdtBooking></EdtBooking>,
-        loader: ({params})=> fetch(`https://parcel-pro-server-livid.vercel.app/booking/${params.id}`)
+        loader: ({params})=> fetch(`http://localhost:5000/${params.id}`)
       },    
       {
         path:'pay/:id',
         element:<Pay></Pay>,
-        loader: ({params})=> fetch(`https://parcel-pro-server-livid.vercel.app/booking/${params.id}`)
+        loader: ({params})=> fetch(`http://localhost:5000/${params.id}`)
       },      
           
        {

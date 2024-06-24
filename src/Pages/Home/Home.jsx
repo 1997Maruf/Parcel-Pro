@@ -5,7 +5,7 @@ import TopDeliveryMan from "./TopDeliveryMan";
 
 const Home = () => {
     return (
-        <div>
+        <div className="">
            <Banner></Banner>
            <FeaturesSection></FeaturesSection>
            <TopDeliveryMan></TopDeliveryMan>

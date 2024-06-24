@@ -34,7 +34,7 @@ const MyparcelRow = ({booking}) => {
               "Your file has been deleted.",
                "success"
             )
-           fetch(`https://parcel-pro-server-livid.vercel.app/booking/${_id}`,{
+           fetch(`http://localhost:5000/${_id}`,{
             method: 'DELETE'
            } )
            .then(res => res.json())
@@ -91,16 +91,16 @@ const MyparcelRow = ({booking}) => {
   }
     return (
         
-        <tbody>
+        <tbody className="overflow-x-auto">
         {/* row 1 */}
-          <tr>
+          <tr >
               <th>1</th>
-              <td>{type}</td>
-              <td>{deliveryDate}</td>
-              <td>{approximateDate}</td>
-              <td>{bookingDate}</td>
-              <td>{deliveryMenId}</td>
-              <td>{status}</td>
+              <td >{type}</td>
+              <td >{deliveryDate}</td>
+              <td >{approximateDate}</td>
+              <td >{bookingDate}</td>
+              <td >{deliveryMenId}</td>
+              <td >{status}</td>
               <td >  <Link to= {`/dashboard/up/${_id}`} className="btn btn-outline btn-secondary">Update</Link></td>
               <td><button onClick={() => haldelDelete(_id)} className="btn btn-outline btn-warning">Cancel</button></td>
               <td><Button

@@ -54,7 +54,7 @@
 //     //     const aoximatedate = form.aoximatedate.value;
 //     //     console.log(name,aoximatedate)
 //     //     const updateBooking = { name, aoximatedate}
-//     //     fetch(https://parcel-pro-server-livid.vercel.app/booking/${_id}`, {
+//     //     fetch(http://localhost:5000/${_id}`, {
 //     //     method: 'PUT',
 //     //     headers: {
 //     //         'content-type': 'application/json'
