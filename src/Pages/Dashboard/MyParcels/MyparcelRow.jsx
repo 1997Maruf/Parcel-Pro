@@ -34,7 +34,7 @@ const MyparcelRow = ({booking}) => {
               "Your file has been deleted.",
                "success"
             )
-           fetch(`http://localhost:5000/${_id}`,{
+           fetch(`https://parcel-pro-server-livid.vercel.app/${_id}`,{
             method: 'DELETE'
            } )
            .then(res => res.json())
@@ -69,7 +69,7 @@ const MyparcelRow = ({booking}) => {
     const rating = form.rating.value;
    const feetdback = {displayName,rating,photoURL,feedback,usersName,deliveryMenId,feedBackDdate};
    console.log("may feedback",feetdback)
-   fetch('https://parcel-pro-server-livid.vercel.app/feetdbacks',{
+   fetch('https://parcel-pro-server-livid.vercel.app//feetdbacks',{
     method: 'POST',
     headers: {
         'content-type' : 'application/json'

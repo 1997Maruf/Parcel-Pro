@@ -11,7 +11,7 @@ const MyParcels = () => {
   console.log(user);
   const [bookings, setBookings] = useState([]);
   // console.log(bookings);
-  const url = `http://localhost:5000/booking/?email=${user?.email}`;
+  const url = `https://parcel-pro-server-livid.vercel.app/booking/?email=${user?.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
- baseURL: 'https://parcel-pro-server-livid.vercel.app/'
+ baseURL: 'https://parcel-pro-server-livid.vercel.app//'
 })
 const useAxiosSecure = () => {
    

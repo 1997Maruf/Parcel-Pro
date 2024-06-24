@@ -7,7 +7,7 @@ const MyReviews = () => {
     const [deliveryMan, setDeliveryMan] = useState({});
     const {_id} = deliveryMan || {};
   console.log("mydeliverymanID",deliveryMan?._id)
-  const url = `https://parcel-pro-server-livid.vercel.app/users/${email}`;
+  const url = `https://parcel-pro-server-livid.vercel.app//users/${email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -20,7 +20,7 @@ const MyReviews = () => {
   
   useEffect(() => {
     if(_id){
-      fetch(`https://parcel-pro-server-livid.vercel.app/feetdbacks/${_id}`)
+      fetch(`https://parcel-pro-server-livid.vercel.app//feetdbacks/${_id}`)
       .then((res) => res.json())
       .then((data) =>setFeetdback(data));
     }

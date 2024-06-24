@@ -3,7 +3,6 @@ import {
   Button,
   Dialog,
   DialogPanel,
-
   Transition,
   TransitionChild,
 } from "@headlessui/react";
@@ -13,7 +12,7 @@ import Swal from "sweetalert2";
 const AllParcel = () => {
   const [bookings, setBookings] = useState([]);
   console.log(bookings);
-  const url = "http://localhost:5000/booking";
+  const url = "https://parcel-pro-server-livid.vercel.app/booking";
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -21,10 +20,10 @@ const AllParcel = () => {
   }, []);
 
   const [deliveryMans, setDeliveryMans] = useState([]);
-  console.log('deliveryMan',deliveryMans);
+  console.log("deliveryMan", deliveryMans);
 
   useEffect(() => {
-    fetch("https://parcel-pro-server-livid.vercel.app/users")
+    fetch("https://parcel-pro-server-livid.vercel.app//users")
       .then((res) => res.json())
       .then((data) => {
         const deliveryMan = data.filter((man) => man.role === "delivery");
@@ -34,43 +33,43 @@ const AllParcel = () => {
 
   let [isOpen, setIsOpen] = useState(false);
   const [_id, set_Id] = useState();
-  console.log(_id)
-   function open(booking) {
-    console.log(booking)
-     setIsOpen(true);
-     set_Id(booking._id);
-   }
- 
-   function close() {
-     setIsOpen(false);
-   }
-  const handleSubmit= (event)  => {
+  console.log(_id);
+  function open(booking) {
+    console.log(booking);
+    setIsOpen(true);
+    set_Id(booking._id);
+  }
+
+  function close() {
+    setIsOpen(false);
+  }
+  const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
     const deliveryMenId = form.deliveryMenId.value;
     const approximateDate = form.approximateDate.value;
-    console.log(deliveryMenId, approximateDate)
-    const updateBooking = { deliveryMenId, approximateDate}
-    fetch(`http://localhost:5000/booking/${_id}`, {
-    method: 'PUT',
-    headers: {
-        'content-type': 'application/json'
-    },
-    body: JSON.stringify(updateBooking)
-})
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        if(data.modifiedCount > 0){
-            Swal.fire({
-                title: 'Success!',
-                text: 'Craft Update Successfully',
-                icon: 'success',
-                confirmButtonText: 'Cool'
-              })
-        }
+    console.log(deliveryMenId, approximateDate);
+    const updateBooking = { deliveryMenId, approximateDate };
+    fetch(`https://parcel-pro-server-livid.vercel.app/booking/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateBooking),
     })
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Success!",
+            text: "Craft Update Successfully",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+        }
+      });
+  };
 
   return (
     <div className="overflow-x-auto">
@@ -101,7 +100,7 @@ const AllParcel = () => {
               <td>{booking.status}</td>
               <td>
                 <Button
-                  onClick={()=>open(booking)}
+                  onClick={() => open(booking)}
                   className="rounded-md  btn-outline btn-secondary py-2 px-4 text-sm font-medium text-white focus:outline-none data-[hover]:bg-black/30 data-[focus]:outline-1 data-[focus]:outline-white"
                 >
                   Manage
@@ -131,15 +130,24 @@ const AllParcel = () => {
                 <DialogPanel className="w-full max-w-md rounded-xl bg-white/5 p-6 backdrop-blur-2xl">
                   {/* model component */}
                   <form onSubmit={handleSubmit}>
-                  <select name="deliveryMenId">
-              {
-              deliveryMans?.map(dali=> <option key={dali._id} value={dali._id}>{dali.name}</option>)
-                
-              }
-               </select>
-                    <input className="ml-5" type="date" name="approximateDate" />
+                    <select name="deliveryMenId">
+                      {deliveryMans?.map((dali) => (
+                        <option key={dali._id} value={dali._id}>
+                          {dali.name}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      className="ml-5"
+                      type="date"
+                      name="approximateDate"
+                    />
 
-                    <input className="bg-orange-400 ml-7" type="submit" value='submit' />
+                    <input
+                      className="bg-orange-400 ml-7"
+                      type="submit"
+                      value="submit"
+                    />
                   </form>
                   <div className="mt-4">
                     <Button
@@ -161,10 +169,6 @@ const AllParcel = () => {
 
 export default AllParcel;
 
-
-
-
-
-
-
-{/* <input type="radio" name="Developer" value="No"> */}
+{
+  /* <input type="radio" name="Developer" value="No"> */
+}

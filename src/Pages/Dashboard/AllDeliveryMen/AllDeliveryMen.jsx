@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const AllDeliveryMen = () => {
     const [users, setUsers] = useState([]);
    console.log(users);
-    const url = 'https://parcel-pro-server-livid.vercel.app/users';
+    const url = 'https://parcel-pro-server-livid.vercel.app//users';
     useEffect(() => {
         fetch(url)
           .then((res) => res.json())
